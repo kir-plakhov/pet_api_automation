@@ -4,12 +4,20 @@ from lib.my_requests import MyRequests
 
 
 class TestUserGet(BaseCase):
-    def test_get_user_details_not_auth(self):
+    def test_get_user_details_not_auth_username(self):
         response = MyRequests.get("/user/2")
-
         Assertions.assert_json_has_key(response, "username")
+
+    def test_get_user_details_not_auth_first_name(self):
+        response = MyRequests.get("/user/2")
         Assertions.assert_json_not_has_key(response, "firstName")
+
+    def test_get_user_details_not_auth_last_name(self):
+        response = MyRequests.get("/user/2")
         Assertions.assert_json_not_has_key(response, "lastName")
+
+    def test_get_user_details_not_auth_email(self):
+        response = MyRequests.get("/user/2")
         Assertions.assert_json_not_has_key(response, "email")
 
     def test_get_user_details_auth_as_same_user(self):
