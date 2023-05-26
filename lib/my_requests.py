@@ -46,3 +46,25 @@ class MyRequests:
         Logger.add_response(response)
 
         return response
+
+    @staticmethod
+    def _send_alt(method: str, url: str, data: dict, headers: dict, cookies: dict):
+
+        url = f"https://playground.learnqa.ru/api{url}"
+
+        if headers is None:
+            headers = {}
+        if cookies is None:
+            cookies = {}
+
+        Logger.add_request(url, data, headers, cookies, method)
+
+        response = requests.request(method, url, data=data, headers=headers, cookies=cookies)
+
+        Logger.add_response(response)
+
+        return response
+
+    @staticmethod
+    def universal_method(method: str, url: str, data: dict = None, headers: dict = None, cookies: dict = None):
+        return MyRequests._send_alt(method, url, data, headers, cookies)
